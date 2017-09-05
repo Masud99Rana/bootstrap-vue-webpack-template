@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ appTitle }}</h1>
+    <h1>/{{ appTitle }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
@@ -18,8 +18,9 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
     <button @click="listItems">List items</button>
+    <p v-if="listError" class="error">Failed to list items</p>
     <ul>
-      <li v-for="item in items">{{ item.name }}</li>
+      <li v-for="item in items">/{{ item.name }}</li>
     </ul>
   </div>
 </template>
@@ -30,7 +31,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'hello',
 
-  computed: mapGetters([ 'appTitle', 'items' ]),
+  computed: mapGetters([ 'appTitle', 'items', 'listError' ]),
 
   methods: mapActions([ 'listItems' ])
 }{{#if_eq lintConfig "airbnb"}};{{/if_eq}}

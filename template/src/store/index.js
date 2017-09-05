@@ -8,7 +8,7 @@ import state from './state'
 
 Vue.use(Vuex)
 
-const store = new Vuex.store({
+const store = new Vuex.Store({
   actions,
   getters,
   modules,
