@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>/{{ appTitle }}</h1>
+    <h1>\{{ appTitle }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
@@ -20,7 +20,7 @@
     <button @click="listItems">List items</button>
     <p v-if="listError" class="error">Failed to list items</p>
     <ul>
-      <li v-for="item in items">/{{ item.name }}</li>
+      <li v-for="item in items">\{{ item.name }}</li>
     </ul>
   </div>
 </template>
