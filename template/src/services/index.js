@@ -1,5 +1,5 @@
 import * as itemService from './item-service'
 
-export default {
+export {
   itemService
 }
