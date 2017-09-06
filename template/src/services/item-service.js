@@ -1,14 +1,14 @@
 import Item from '@/models/Item'
 
 let items = [
-  new Item({ id: 1, name: 'item1', old: true }),
-  new Item({ id: 2, name: 'item2', old: false }),
-  new Item({ id: 3, name: 'item3', old: false }),
-  new Item({ id: 4, name: 'item4', old: true })
+  { id: 1, name: 'item1', old: true },
+  { id: 2, name: 'item2', old: false },
+  { id: 3, name: 'item3', old: false },
+  { id: 4, name: 'item4', old: true }
 ]
 
 function normalizeResponse (response) {
-  return response.map(data => new Item(data))
+  return new Item(response)
 }
 
 function normalizeRequest (request) {
@@ -16,11 +16,11 @@ function normalizeRequest (request) {
 }
 
 export function fetchItems () {
-  return Promise.resolve(JSON.parse(JSON.stringify(items)))
+  return Promise.resolve(JSON.parse(JSON.stringify(items.map(normalizeResponse))))
 }
 
 export function fetchItem (id) {
-  return Promise.resolve(Object.assign({}, items.find(item => item.id === id)))
+  return Promise.resolve(Object.assign({}, new Item(items.find(item => item.id === id))))
 }
 
 export function createItem (data) {
@@ -30,7 +30,7 @@ export function createItem (data) {
 }
 
 export function deleteItem (id) {
-  const item = items.find(item => item.id = id)
+  const item = items.find(item => { item.id = id })
   if (!item) {
     return Promise.reject(new Error('Item not found'))
   }
