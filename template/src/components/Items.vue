@@ -12,7 +12,7 @@
 
         <b-row class="mb-3">
           <b-col>
-            <b-button variant="primary" @click="listItems">List items</b-button>
+            <b-button :disabled="pending" variant="primary" @click="listItems">List items</b-button>
           </b-col>
         </b-row>
 
