@@ -1,29 +1,37 @@
 import axios from 'axios'
 
-function httpRequest (method, url, request) {
-  return axios[method](url, request)
-    .then(response => Promise.resolve(response))
+/*
+ * Detailed Axios API info: https://github.com/mzabriskie/axios
+ *
+ * For methods get and delete, the request parameter becomes the config
+ *
+ * For methods put, post, and patch, the request parameter is the body so the
+ * additional config parameter is used
+ */
+function httpRequest (method, url, request, config) {
+  return axios[method](url, request, config)
+    .then(response => Promise.resolve(response.data))
     .catch(error => Promise.reject(error))
 }
 
 export default {
-  get (url, request) {
-    return httpRequest('get', url, request)
+  get (url, config = {}) {
+    return httpRequest('get', url, config)
   },
 
-  delete (url, request) {
-    return httpRequest('delete', url, request)
+  delete (url, config = {}) {
+    return httpRequest('delete', url, config)
   },
 
-  post (url, request) {
-    return httpRequest('post', url, request)
+  post (url, payload, config = {}) {
+    return httpRequest('post', url, payload, config)
   },
 
-  put (url, request) {
-    return httpRequest('put', url, request)
+  put (url, payload, config = {}) {
+    return httpRequest('put', url, payload, config)
   },
 
-  patch (url, request) {
-    return httpRequest('patch', url, request)
+  patch (url, payload, config = {}) {
+    return httpRequest('patch', url, payload, config)
   }
 }
