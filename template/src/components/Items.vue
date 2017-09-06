@@ -2,9 +2,9 @@
   <div class="items">
     <h1>\{{ appTitle }}</h1>
 
-    <button class="btn btn-primary" @click="listItems">List items</button>
+    <b-button variant="primary" @click="listItems">List items</b-button>
 
-    <p v-if="listError" class="error">Failed to list items</p>
+    <b-alert :show="listError" variant="danger">Failed to list items</b-alert>
 
     <b-list-group>
       <b-list-group-item v-for="item in items" :key="item.id">
