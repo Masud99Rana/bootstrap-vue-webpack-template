@@ -1,17 +1,42 @@
 <template>
-  <div class="items">
-    <h1>\{{ appTitle }}</h1>
+  <b-container class="items">
+    <b-row>
+      <b-col>
+        <b-row>
+          <b-col>
+            <h1>\{{ appTitle }}</h1>
+          </b-col>
+        </b-row>
 
-    <b-button variant="primary" @click="listItems">List items</b-button>
+        <hr class="my-4">
 
-    <b-alert :show="listError" variant="danger">Failed to list items</b-alert>
+        <b-row class="mb-3">
+          <b-col>
+            <b-button variant="primary" @click="listItems">List items</b-button>
+          </b-col>
+        </b-row>
 
-    <b-list-group>
-      <b-list-group-item v-for="item in items" :key="item.id">
-        <span>\{{ item.name }}</span>
-      </b-list-group-item>
-    </b-list-group>
-  </div>
+        <b-row>
+          <b-col>
+            <b-alert :show="pending" variant="info">Loading...</b-alert>
+            <b-alert :show="listError" variant="danger">Failed to list items</b-alert>
+            <b-alert :show="removeError" variant="danger">Failed to delete item</b-alert>
+          </b-col>
+        </b-row>
+
+        <b-row>
+          <b-col>
+            <b-list-group>
+              <b-list-group-item v-for="item in items" :key="item.id">
+                <span>\{{ item.name }}</span>
+                <i @click="removeItem(item.id)" class="fa fa-close cursor-pointer"></i>
+              </b-list-group-item>
+            </b-list-group>
+          </b-col>
+        </b-row>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -20,12 +45,16 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'items',
 
-  computed: {
-    ...mapGetters([ 'appTitle' ]),
-    ...mapGetters('items', [ 'items', 'listError' ])
+  created () {
+    this.listItems()
   },
 
-  methods: mapActions('items', [ 'listItems' ])
+  computed: {
+    ...mapGetters([ 'appTitle' ]),
+    ...mapGetters('items', [ 'items', 'listError', 'removeError', 'pending' ])
+  },
+
+  methods: mapActions('items', [ 'listItems', 'removeItem' ])
 }
 </script>
 

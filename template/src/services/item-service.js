@@ -15,25 +15,42 @@ function normalizeRequest (request) {
   return new Item(request)
 }
 
-export function fetchItems () {
-  return Promise.resolve(JSON.parse(JSON.stringify(items.map(normalizeResponse))))
+export function fetchAll () {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(JSON.parse(JSON.stringify(items.map(normalizeResponse))))
+    }, 1000)
+  })
 }
 
-export function fetchItem (id) {
-  return Promise.resolve(Object.assign({}, new Item(items.find(item => item.id === id))))
+export function fetchOne (id) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(Object.assign({}, new Item(items.find(item => item.id === id))))
+    }, 1000)
+  })
 }
 
-export function createItem (data) {
+export function create (data) {
   data.id = Math.random() * Number.MAX_SAFE_INTEGER
-  items.push(normalizeRequest(data))
-  return Promise.resolve()
+  const item = normalizeRequest(data)
+  items.push(item)
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(item)
+    }, 1000)
+  })
 }
 
-export function deleteItem (id) {
-  const item = items.find(item => { item.id = id })
-  if (!item) {
-    return Promise.reject(new Error('Item not found'))
-  }
-  items = items.filter(item => item.id !== id)
-  return Promise.resolve(item)
+export function remove (id) {
+  const item = items.find(item => item.id === id)
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (!item) {
+        reject(new Error('Item not found'))
+      }
+      items = items.filter(item => item.id !== id)
+      resolve(item)
+    }, 1000)
+  })
 }
