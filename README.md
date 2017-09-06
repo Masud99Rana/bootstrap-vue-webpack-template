@@ -1,7 +1,5 @@
 # bootstrap-vue-webpack-boilerplate
 
-> Forked from [vue-webpack-boilerplate](https://github.com/vuejs-templates/webpack)
-
 > A full-featured Webpack setup with hot-reload, lint-on-save, unit testing & css extraction.
 
 > This template is meant to be opinionated. Besides Webpack, it also includes Vue-Router, Vuex, Axios, and Bootstrap-Vue.
